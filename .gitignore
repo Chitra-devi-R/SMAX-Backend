@@ -1,0 +1,10 @@
+# Firebase credentials (NEVER commit this!)
+config/firebase-service-account.json
+config/*.json
+
+# Also add:
+*.json
+!package.json
+!package-lock.json
+.env
+node_modules/

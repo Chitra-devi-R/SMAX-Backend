@@ -1,0 +1,373 @@
+# SMAX Backend - Commercial Vehicle Marketplace API
+
+## 📋 Project Overview
+
+Node.js/Express backend API for SMAX marketplace platform. Supports user authentication, vehicle listings, real-time chat, video/voice calls, push notifications, and service center directory.
+
+**Total APIs:** 73 endpoints
+**Status:** Production Ready
+
+---
+
+## 🛠️ Tech Stack & Versions
+
+### **Runtime & Package Manager**
+```
+Node.js: v22.18.0 (or v18+ recommended)
+npm: v10.x (comes with Node.js)
+```
+
+### **Core Framework**
+```json
+{
+  "express": "^4.18.2",
+  "mongoose": "^8.0.0"
+}
+```
+
+### **Database**
+```
+MongoDB: v6.0+ (Local or Atlas)
+```
+
+### **Key Dependencies**
+
+| Package | Purpose | Version |
+|---------|---------|---------|
+| express | Web framework | ^4.18.2 |
+| mongoose | MongoDB ODM | ^8.0.0 |
+| jsonwebtoken | JWT authentication | ^9.0.0 |
+| bcryptjs | Password hashing | ^2.4.3 |
+| cloudinary | Image/video storage | ^1.41.0 |
+| twilio | SMS OTP service | ^4.19.0 |
+| nodemailer | Email service | ^6.9.7 |
+| firebase-admin | Push notifications | ^11.11.0 |
+| agora-access-token | Video/voice calls | ^2.0.4 |
+| multer | File upload handling | ^1.4.5 |
+| cors | CORS handling | ^2.8.5 |
+| dotenv | Environment variables | ^16.3.1 |
+
+### **Development Dependencies**
+
+| Package | Purpose | Version |
+|---------|---------|---------|
+| nodemon | Auto-restart server | ^3.0.1 |
+
+---
+
+## 📦 Complete Package List
+
+Run this command to see exact installed versions:
+```bash
+npm list --depth=0
+```
+
+---
+
+## 🚀 Installation & Setup
+
+### **Prerequisites**
+
+1. **Install Node.js** (v18 or higher)
+   - Download: https://nodejs.org/
+   - Verify installation:
+     ```bash
+     node --version
+     npm --version
+     ```
+
+2. **Install MongoDB** (Choose one)
+   
+   **Option A: Local MongoDB**
+   - Download: https://www.mongodb.com/try/download/community
+   - Start MongoDB service:
+     ```bash
+     mongod
+     ```
+
+   **Option B: MongoDB Atlas (Cloud - Recommended)**
+   - Sign up: https://www.mongodb.com/cloud/atlas
+   - Create free cluster
+   - Get connection string
+
+3. **Install Git** (if not already installed)
+   - Download: https://git-scm.com/
+
+---
+
+### **Setup Steps**
+
+#### **1. Clone Repository**
+```bash
+git clone <repository-url>
+cd smax-backend
+```
+
+#### **2. Install Dependencies**
+```bash
+npm install
+```
+
+This will install all packages listed in `package.json`
+
+#### **3. Setup Environment Variables**
+
+```bash
+# Copy the example env file
+cp .env.example .env
+
+# Edit .env file with your actual values
+```
+
+**Required Environment Variables:**
+
+```env
+NODE_ENV=development
+PORT=5000
+MONGODB_URI=mongodb://localhost:27017/smax-app
+JWT_SECRET=your_secret_key_here
+
+# Twilio (for SMS OTP)
+TWILIO_ACCOUNT_SID=
+TWILIO_AUTH_TOKEN=
+TWILIO_PHONE_NUMBER=
+
+# Email (for Email OTP)
+EMAIL_USER=
+EMAIL_PASS=
+
+# Cloudinary (for file uploads)
+CLOUDINARY_CLOUD_NAME=
+CLOUDINARY_API_KEY=
+CLOUDINARY_API_SECRET=
+
+# Firebase (for push notifications)
+FIREBASE_SERVICE_ACCOUNT_PATH=./config/firebase-service-account.json
+
+# Agora (for video/voice calls)
+AGORA_APP_ID=
+AGORA_APP_CERTIFICATE=
+```
+
+**Get credentials from:**
+- Twilio: https://console.twilio.com/
+- Cloudinary: https://cloudinary.com/console
+- Firebase: https://console.firebase.google.com/
+- Agora: https://console.agora.io/
+
+#### **4. Setup Firebase Service Account**
+
+1. Go to Firebase Console
+2. Project Settings → Service Accounts
+3. Generate new private key
+4. Save as: `config/firebase-service-account.json`
+
+**⚠️ This file is in .gitignore - must be added manually!**
+
+#### **5. Start MongoDB** (if using local)
+```bash
+mongod
+```
+
+#### **6. Run the Server**
+
+**Development mode (with auto-restart):**
+```bash
+npm run dev
+```
+
+**Production mode:**
+```bash
+npm start
+```
+
+#### **7. Verify Server is Running**
+
+Open browser or Postman:
+```
+http://localhost:5000/api/health
+```
+
+**Expected response:**
+```json
+{
+  "success": true,
+  "message": "Server is running"
+}
+```
+
+---
+
+## 📁 Project Structure
+
+```
+smax-backend/
+├── src/
+│   ├── controllers/     # Business logic
+│   ├── models/          # Database schemas
+│   ├── routes/           # API routes
+│   ├── middleware/       # Custom middleware
+│   ├── config/            # Configuration files
+│   ├── utils/             # Helper functions
+│   └── app.js             # Express app setup
+├── config/
+│   └── firebase-service-account.json  (not in git)
+├── .env                    (not in git)
+├── .env.example            (in git - template)
+├── .gitignore
+├── package.json
+├── server.js               # Entry point
+└── README.md
+```
+
+---
+
+## 🧪 Testing the APIs
+
+### **Postman Collection**
+
+Import the Postman collection: `SMAX-Backend.postman_collection.json`
+
+### **Base URL**
+```
+http://localhost:5000
+```
+
+### **Total Endpoints: 73**
+
+- Authentication: 12 APIs
+- Users: 10 APIs
+- Categories: 5 APIs
+- Ads: 12 APIs
+- Chat: 6 APIs
+- Calls: 6 APIs
+- Notifications: 6 APIs
+- Services: 6 APIs
+- Admin: 10 APIs
+
+### **Quick Test**
+
+1. Register a user:
+```http
+POST /api/auth/register
+{
+  "name": "Test User",
+  "email": "test@example.com",
+  "mobile": "+919876543210",
+  "password": "test123"
+}
+```
+
+2. Check terminal for OTP (development mode)
+
+3. Verify OTP:
+```http
+POST /api/auth/verify-otp
+{
+  "emailOrMobile": "test@example.com",
+  "otp": "123456"
+}
+```
+
+4. Login:
+```http
+POST /api/auth/login
+{
+  "emailOrMobile": "test@example.com",
+  "password": "test123"
+}
+```
+
+---
+
+## 🔐 Making a User Admin
+
+**Using MongoDB Compass or Shell:**
+
+```javascript
+db.users.updateOne(
+  { email: "admin@example.com" },
+  { $set: { role: "admin" } }
+)
+```
+
+---
+
+## 🌍 Environment Modes
+
+### **Development Mode**
+```env
+NODE_ENV=development
+```
+- OTP shown in terminal (no real SMS/Email)
+- Detailed error logging
+- CORS allows localhost
+
+### **Production Mode**
+```env
+NODE_ENV=production
+```
+- Real SMS via Twilio
+- Real Email via Gmail SMTP
+- Stricter error handling
+
+---
+
+## 📊 Database Models
+
+- User
+- Ad (Vehicle Listings)
+- Category
+- Chat
+- Message
+- Call
+- Notification
+- Service
+- Category
+
+---
+
+## 🔧 Common Issues & Solutions
+
+### **Issue: MongoDB Connection Failed**
+```bash
+Solution: 
+1. Check MongoDB is running: mongod
+2. Verify MONGODB_URI in .env
+3. If using Atlas, whitelist your IP
+```
+
+### **Issue: Module Not Found**
+```bash
+Solution:
+npm install
+```
+
+### **Issue: Port Already in Use**
+```bash
+Solution:
+1. Change PORT in .env
+2. Or kill process using port 5000
+```
+
+---
+
+## 📞 Support & Documentation
+
+- API Documentation: See `API_DOCUMENTATION.md`
+- Postman Collection: `SMAX-Backend.postman_collection.json`
+
+---
+
+## 👨‍💻 Developer Notes
+
+**Last Updated:** March 22, 2026
+**Node Version Used:** v22.18.0
+**Database:** MongoDB (Local/Atlas)
+**All 73 APIs:** Tested and Working ✅
+
+---
+
+## 📝 License
+
+Private - SMAX Marketplace Project

@@ -1,0 +1,46 @@
+{
+  "name": "smax-backend",
+  "version": "1.0.0",
+  "description": "SMAX Vehicle Marketplace Backend with Cloudinary",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": [
+    "vehicle",
+    "marketplace",
+    "cloudinary",
+    "nodejs"
+  ],
+  "author": "Your Name",
+  "license": "ISC",
+  "dependencies": {
+    "agora-access-token": "^2.0.4",
+    "agora-token": "^2.0.5",
+    "bcryptjs": "^3.0.3",
+    "cloudinary": "^2.9.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "express-validator": "^7.3.1",
+    "firebase-admin": "^13.6.1",
+    "geolib": "^3.3.4",
+    "helmet": "^8.1.0",
+    "i18n": "^0.15.3",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.1.2",
+    "morgan": "^1.10.1",
+    "multer": "^2.0.2",
+    "multer-storage-cloudinary": "^4.0.0",
+    "node-geocoder": "^4.4.1",
+    "nodemailer": "^7.0.12",
+    "socket.io": "^4.8.3",
+    "streamifier": "^0.1.1",
+    "twilio": "^5.11.2",
+    "uuid": "^13.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11"
+  }
+}
